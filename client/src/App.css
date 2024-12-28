@@ -31,22 +31,47 @@ header nav {
   gap: 15px;
 }
 
-.post {
-  display: flex;
-  gap: 20px; /* Space between image and text */
-  align-items: flex-start; /* Align items to the top */
+.posts-container {
   margin-top: 20px;
 }
 
-.post img {
-  width: 40%; /* Image takes 40% of the container width */
+.post-item {
+  display: flex;
+  flex-direction: column; /* Stack image and text */
+  margin-top: 20px;
+  border-bottom: 1px solid #ccc; /* Add a subtle border to separate posts */
+  padding-bottom: 20px; /* Space between posts */
+}
+
+.post-item img {
+  width: 100%; /* Full width of the container */
+  max-width: 800px; /* Ensure images don't overflow */
+  height: auto; /* Maintain aspect ratio */
   border-radius: 8px;
 }
 
-.post .description {
-  flex: 1; /* Remaining space for the description */
+.post-item .description {
+  padding-top: 10px; /* Space between image and text */
 }
 
 h2 {
   margin-top: 0;
+}
+
+.info {
+  font-size: 14px;
+  color: #555;
+}
+
+.author {
+  background: none;
+  border: none;
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.author:hover {
+  text-decoration: none;
 }
