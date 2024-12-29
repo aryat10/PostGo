@@ -7,7 +7,7 @@ function App() {
   return (
     <main>
       {/* Header Section */}
-      <Header />
+      <Header /> 
       
       {/* Blog Entry Section */}
       <div className="posts-container">
