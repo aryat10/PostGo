@@ -8,10 +8,11 @@ function App() {
     <main>
       {/* Header Section */}
       <Header />
+      Blog Post section
       
       {/* Blog Entry Section */}
       <div className="posts-container">
-        <Post />
+        
         <Post /> {/* Add more Post components if needed */}
       </div>
     </main>
