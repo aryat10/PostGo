@@ -7,8 +7,12 @@ function App() {
   return (
     <main>
       {/* Header Section */}
+<<<<<<< HEAD
       <Header />
       Blog Post section
+=======
+      <Header /> 
+>>>>>>> 803502e68af56826b7da1512845c73cb096dd207
       
       {/* Blog Entry Section */}
       <div className="posts-container">
