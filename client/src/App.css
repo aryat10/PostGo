@@ -44,7 +44,7 @@ header nav {
 }
 
 .post-item img {
-  width: 100%; /* Full width of the container */
+  width: 55%; /* Full width of the container */
   max-width: 800px; /* Ensure images don't overflow */
   height: auto; /* Maintain aspect ratio */
   border-radius: 8px;
