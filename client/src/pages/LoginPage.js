@@ -11,7 +11,7 @@ export default function LoginPage() {
     >
       <div
         style={{
-          maxWidth: "400px",
+          maxWidth: "450px",
           width: "100%",
           padding: "20px",
           borderRadius: "8px",
@@ -19,7 +19,7 @@ export default function LoginPage() {
           boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <h2 className="text-center mb-3">Welcome back to Post Go</h2>
+        <h2 className="text-center mb-3">Welcome back to Post Go </h2>
         <p className="text-center text-muted mb-4">
           Let's spread your blog/post again.
         </p>
