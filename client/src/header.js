@@ -2,11 +2,11 @@ export default function Header() {
   return (
     <header>
       <a href="/" className="logo">
-        - Post Go -
+        <h1>- Post Go -</h1>
       </a>
       <nav>
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
+        <a href="/login"><h3>Login</h3></a>
+        <a href="/register"><h3>Register</h3></a>
       </nav>
     </header>
   );
