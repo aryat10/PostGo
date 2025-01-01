@@ -1,15 +1,39 @@
-export default function RegisterPage() {
+export default function LoginPage() {
   return (
-    <div className="register-page">
-      <form className="register-form">
-        <h2 className="form-heading">Join Us at Post Forge</h2>
-        <p className="form-subtext">
-          Create your account and share your stories
-        </p>
-        <input type="text" className="form-input" placeholder="Username" />
-        <input type="password" className="form-input" placeholder="Password" />
-        <button type="submit" className="form-button">
-          Register Now
+    <div>
+      <form>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">
+            Email address
+          </label>
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
+          <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">
+            Password
+          </label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+          />
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+          <label class="form-check-label" for="exampleCheck1">
+            Check me out
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          Submit
         </button>
       </form>
     </div>

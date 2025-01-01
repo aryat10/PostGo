@@ -1,18 +1,29 @@
 import React from "react";
-import Header from "./header"; 
-import Post from './post'
-import "./App.css"; 
+// import Header from "./header";
+import Layout from "./layout";
+import Post from "./post";
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import Header from "./header";
+// import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
-    <main>
-      {/* Header Section */}
-      <Header />
-      Blog Post section :{/* Blog Entry Section */}
-      <div className="posts-container">
-        <Post /> {/* Add more Post components if needed */}
-      </div>
-    </main>
+    <Routes>
+      <Route path='/' element={
+        <main>
+          <Layout />
+          <Header />
+        </main>
+      } />
+      <Route index element={<Post />} />
+
+      <Route path={"/login"} element={
+        <main>
+          <Header />
+        </main>
+      } />
+    </Routes>
   );
 }
 

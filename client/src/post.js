@@ -4,6 +4,7 @@ export default function Post() {
   return (
     <div className="post">
       {/* Post 1 */}
+      
       <div className="post-item">
         <img
           src="https://techcrunch.com/wp-content/uploads/2024/12/rivian-sirius-xm.jpg?resize=1280,985"
@@ -29,10 +30,10 @@ export default function Post() {
             <span>1:09 PM PST · December 18, 2024</span>
           </p>
           <p>
-            Rivian has released a new software update to its vehicles that brings
-            some long-awaited apps to its in-vehicle experience. Owners who update
-            their R1S SUV or R1T pickup truck can now use YouTube (while parked)
-            or SiriusXM (with a subscription).
+            Rivian has released a new software update to its vehicles that
+            brings some long-awaited apps to its in-vehicle experience. Owners
+            who update their R1S SUV or R1T pickup truck can now use YouTube
+            (while parked) or SiriusXM (with a subscription).
           </p>
         </div>
       </div>
@@ -63,6 +64,30 @@ export default function Post() {
             adding commentary, Threads users will instead be able to click a new
             option, “Use media,”
           </p>
+          <button type="button" class="btn btn-outline-primary">
+            Primary
+          </button>
+          <button type="button" class="btn btn-outline-secondary">
+            Secondary
+          </button>
+          <button type="button" class="btn btn-outline-success">
+            Success
+          </button>
+          <button type="button" class="btn btn-outline-danger">
+            Danger
+          </button>
+          <button type="button" class="btn btn-outline-warning">
+            Warning
+          </button>
+          <button type="button" class="btn btn-outline-info">
+            Info
+          </button>
+          <button type="button" class="btn btn-outline-light">
+            Light
+          </button>
+          <button type="button" class="btn btn-outline-dark">
+            Dark
+          </button>
         </div>
       </div>
     </div>
