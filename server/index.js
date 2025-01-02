@@ -1,13 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const User = require("./models/User"); // Import User model
+const bcrypt = require("bcrypt"); // Import bcrypt
+const User = require("./models/User");
 const cors = require("cors");
 
 const app = express();
 
 // Middleware
-app.use(cors()); // Enable CORS
-app.use(express.json()); // Parse JSON bodies
+app.use(cors());
+app.use(express.json());
 
 // MongoDB Connection
 mongoose
@@ -30,8 +31,12 @@ app.post("/register", async (req, res) => {
   }
 
   try {
-    const userDoc = await User.create({ username, password });
-    res.status(201).json(userDoc);
+    // Hash the password before saving
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    const userDoc = await User.create({ username, password: hashedPassword });
+    res.status(201).json({ message: "User registered successfully" });
   } catch (err) {
     console.error("Error registering user:", err);
     if (err.code === 11000) {
