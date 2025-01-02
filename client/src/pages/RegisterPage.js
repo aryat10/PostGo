@@ -54,12 +54,12 @@ export default function RegisterPage() {
             />
           </div>
 
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label htmlFor="registerEmail" className="form-label">
               Email
             </label>
             <input type="email" className="form-control" id="registerEmail" />
-          </div>
+          </div> */}
           <div className="mb-3">
             <label htmlFor="registerPassword" className="form-label">
               Password
@@ -71,6 +71,17 @@ export default function RegisterPage() {
               value={password}
               onChange={(ev) => setPassword(ev.target.value)}
             />
+          </div>
+
+          <div className="mb-3 form-check">
+            <input
+              type="checkbox"
+              className="form-check-input"
+              id="exampleCheck1"
+            />
+            <label className="form-check-label" htmlFor="exampleCheck1">
+              All details are filled ✅
+            </label>
           </div>
 
           <button type="submit" className="btn btn-primary w-100">
