@@ -5,8 +5,8 @@ export default function RegisterPage() {
 
   async function register(ev) {
     ev.preventDefault();
-    try{
-      await fetch("http://localhost:4000/register", {
+    
+      const response = await fetch("http://localhost:4000/register", {
         method: "POST",
         body: JSON.stringify({
           username,
@@ -16,10 +16,9 @@ export default function RegisterPage() {
           "Content-Type": "application/json",
         },
       });
-    } catch (err) {
-      console.error("Failed to register:", err);
-    }
     
+      console.log(response);
+     
    
   }
   return (
