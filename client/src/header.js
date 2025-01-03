@@ -6,8 +6,16 @@ export default function Header() {
         <h1>- Post Go -</h1>
       </Link>
       <nav>
-        <Link to="/login"><h3>Login</h3></Link>
-        <Link to="/register"><h3>Register</h3></Link>
+        <Link to="/login">
+          <button type="button" class="btn btn-outline-dark">
+            Login
+          </button>
+        </Link>
+        <Link to="/register">
+         <button type="button" class="btn btn-outline-dark">
+            Register
+          </button>
+        </Link>
       </nav>
     </header>
   );
