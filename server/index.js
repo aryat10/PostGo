@@ -46,6 +46,39 @@ app.post("/register", async (req, res) => {
   }
 });
 
+
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).json({ error: "Username and password are required" });
+  }
+
+  try {
+    // Find the user by username
+    const userDoc = await User.findOne({ username });
+
+    // If user not found
+    if (!userDoc) {
+      return res.status(400).json({ error: "Invalid username or password" });
+    }
+
+    // Compare the hashed password
+    const isPasswordValid = await bcrypt.compare(password, userDoc.password);
+
+    if (!isPasswordValid) {
+      return res.status(400).json({ error: "Invalid username or password" });
+    }
+
+    // Successful login
+    res.status(200).json({ message: "Login successful", user: userDoc });
+  } catch (err) {
+    console.error("Error during login:", err);
+    return res.status(500).json({ error: "Failed to login" });
+  }
+});
+
+
 // Start the server
 app.listen(4000, () => {
   console.log("Server is running on http://localhost:4000🎉");
