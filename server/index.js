@@ -1,10 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt"); // Import bcrypt
-const User = require("./models/User");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const cors = require("cors");
+const User = require("./models/User");
 
 const app = express();
+const JWT_SECRET = "your_secret_key_here"; // Replace with a strong secret key
 
 // Middleware
 app.use(cors());
@@ -31,10 +33,8 @@ app.post("/register", async (req, res) => {
   }
 
   try {
-    // Hash the password before saving
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-
     const userDoc = await User.create({ username, password: hashedPassword });
     res.status(201).json({ message: "User registered successfully" });
   } catch (err) {
@@ -46,7 +46,6 @@ app.post("/register", async (req, res) => {
   }
 });
 
-
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
@@ -55,29 +54,51 @@ app.post("/login", async (req, res) => {
   }
 
   try {
-    // Find the user by username
     const userDoc = await User.findOne({ username });
 
-    // If user not found
     if (!userDoc) {
       return res.status(400).json({ error: "Invalid username or password" });
     }
 
-    // Compare the hashed password
     const isPasswordValid = await bcrypt.compare(password, userDoc.password);
 
     if (!isPasswordValid) {
       return res.status(400).json({ error: "Invalid username or password" });
     }
 
-    // Successful login
-    res.status(200).json({ message: "Login successful", user: userDoc });
+    // Generate a JWT token
+    const token = jwt.sign({ id: userDoc._id, username: userDoc.username }, JWT_SECRET, {
+      expiresIn: "1h", // Token expires in 1 hour
+    });
+
+    res.status(200).json({ message: "Login successful", token });
   } catch (err) {
     console.error("Error during login:", err);
     return res.status(500).json({ error: "Failed to login" });
   }
 });
 
+// Middleware to verify JWT
+const verifyToken = (req, res, next) => {
+  const token = req.headers["authorization"]?.split(" ")[1];
+
+  if (!token) {
+    return res.status(403).json({ error: "No token provided" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+};
+
+// Example protected route
+app.post("/create-post", verifyToken, (req, res) => {
+  res.status(200).json({ message: "Post created successfully", user: req.user });
+});
 
 // Start the server
 app.listen(4000, () => {

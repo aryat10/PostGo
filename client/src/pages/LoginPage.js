@@ -1,22 +1,41 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   async function login(ev) {
     ev.preventDefault();
 
-    const response = await fetch("http://localhost:4000/login", {
-      method: "POST",
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    console.log(response);
+    try {
+      const response = await fetch("http://localhost:4000/login", {
+        method: "POST",
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Save token to localStorage
+        localStorage.setItem("token", data.token);
+
+        // Redirect to homepage
+        navigate("/");
+      } else {
+        setError(data.error || "Login failed. Please try again.");
+      }
+    } catch (err) {
+      setError("An error occurred while logging in. Please try again.");
+    }
   }
 
   return (
@@ -44,15 +63,19 @@ export default function LoginPage() {
           Let's spread your blog/post again.
         </p>
         <form onSubmit={login}>
+          {error && (
+            <div className="alert alert-danger" role="alert">
+              {error}
+            </div>
+          )}
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
               UserName
             </label>
             <input
-              type="email"
+              type="text"
               className="form-control"
               id="exampleInputEmail1"
-              aria-describedby="emailHelp"
               value={username}
               onChange={(ev) => setUsername(ev.target.value)}
             />
