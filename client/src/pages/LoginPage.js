@@ -1,4 +1,24 @@
+import { useState } from "react";
 export default function LoginPage() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function login(ev) {
+    ev.preventDefault();
+
+    const response = await fetch("http://localhost:4000/login", {
+      method: "POST",
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response);
+  }
+
   return (
     <div
       style={{
@@ -23,7 +43,7 @@ export default function LoginPage() {
         <p className="text-center text-muted mb-4">
           Let's spread your blog/post again.
         </p>
-        <form>
+        <form onSubmit={login}>
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
               UserName
@@ -33,6 +53,8 @@ export default function LoginPage() {
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
+              value={username}
+              onChange={(ev) => setUsername(ev.target.value)}
             />
           </div>
           <div className="mb-3">
@@ -43,6 +65,8 @@ export default function LoginPage() {
               type="password"
               className="form-control"
               id="exampleInputPassword1"
+              value={password}
+              onChange={(ev) => setPassword(ev.target.value)}
             />
           </div>
           <div className="mb-3 form-check">
