@@ -51,11 +51,12 @@ export default function ProfilePage() {
           color: "#113f67",
         }}
       >
-        <h1>Welcome Back</h1>
+        <h1>Welcome back ! {user?.username || "Guest"} </h1>
 
         <div>
-          <button
-            onClick={handleCreatePost}
+          <button 
+          onClick={handleCreatePost}
+                                            
             style={{
               marginRight: "10px",
               padding: "5px 10px",
@@ -70,7 +71,7 @@ export default function ProfilePage() {
           </button>
           <button
             onClick={handleLogout}
-            style={{
+            style={{                         // onClick={handleCreatePost}
               padding: "5px 10px",
               backgroundColor: "#dc3545",
               color: "#fff",
@@ -84,7 +85,7 @@ export default function ProfilePage() {
         </div>
       </header>
       <main>
-        <h2>Welcome {user?.username || "Guest"} to your profile page!</h2>
+        <h2>This is your profile page 👽</h2>
         {user ? (
           <div>
             <h5>Username: {user.username}</h5>
