@@ -25,6 +25,7 @@ export default function ProfilePage() {
     };
     fetchProfile();
   }, []);
+  
   const navigate = useNavigate();
 
   function handleLogout() {
@@ -83,15 +84,15 @@ export default function ProfilePage() {
         </div>
       </header>
       <main>
-        <h2>Welcometo your profile page!</h2>
+        <h2>Welcome {user?.username || "Guest"} to your profile page!</h2>
         {user ? (
-        <div>
-          <p>Username: {user.username}</p>
-          <p>ID: {user._id}</p>
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+          <div>
+            <p>Username: {user.username}</p>
+            <p>ID: {user._id}</p>
+          </div>
+        ) : (
+          <p>Loading...</p>
+        )}
         {error && <p style={{ color: "red" }}>{error}</p>}
         {/* Add other profile-specific content here */}
       </main>
