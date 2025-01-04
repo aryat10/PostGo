@@ -30,7 +30,7 @@ export default function RegisterPage() {
     >
       <div
         style={{
-          maxWidth: "400px",
+          maxWidth: "490px",
           width: "100%",
           padding: "20px",
           borderRadius: "8px",
@@ -38,7 +38,7 @@ export default function RegisterPage() {
           boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <h2 className="text-center mb-3">Welcome to Post-Go</h2>
+        <h2 className="text-center mb-3">Welcome to Post-Go 👽📤</h2>
         <p className="text-center text-muted mb-4">
           Start sharing your amazing blogs/posts today!
         </p>

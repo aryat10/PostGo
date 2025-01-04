@@ -25,7 +25,7 @@ export default function ProfilePage() {
     };
     fetchProfile();
   }, []);
-  
+
   const navigate = useNavigate();
 
   function handleLogout() {
@@ -47,16 +47,15 @@ export default function ProfilePage() {
           justifyContent: "space-between",
           alignItems: "center",
           padding: "10px 20px",
-          background: '#a2a8d3',
+          background: "#a2a8d3",
           color: "#113f67",
         }}
       >
         <h1>Welcome back ! {user?.username || "Guest"} </h1>
 
         <div>
-          <button 
-          onClick={handleCreatePost}
-                                            
+          <button
+            onClick={handleCreatePost}
             style={{
               marginRight: "10px",
               padding: "5px 10px",
@@ -71,7 +70,8 @@ export default function ProfilePage() {
           </button>
           <button
             onClick={handleLogout}
-            style={{                         // onClick={handleCreatePost}
+            style={{
+              // onClick={handleCreatePost}
               padding: "5px 10px",
               backgroundColor: "#dc3545",
               color: "#fff",
