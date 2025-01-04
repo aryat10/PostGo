@@ -28,8 +28,8 @@ export default function LoginPage() {
         // Save token to localStorage
         localStorage.setItem("token", data.token);
 
-        // Redirect to homepage
-        navigate("/");
+        // Redirect to profile page
+        navigate("/profile");
       } else {
         setError(data.error || "Login failed. Please try again.");
       }

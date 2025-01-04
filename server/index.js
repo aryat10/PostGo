@@ -20,6 +20,23 @@ mongoose
   .then(() => console.log("Connected to MongoDB🍀"))
   .catch((err) => console.error("Failed to connect to MongoDB:❌", err));
 
+// Middleware to verify JWT
+const verifyToken = (req, res, next) => {
+  const token = req.headers["authorization"]?.split(" ")[1];
+
+  if (!token) {
+    return res.status(403).json({ error: "No token provided" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+};
+
 // Routes
 app.get("/", (req, res) => {
   res.json({ message: "Hello World" });
@@ -29,7 +46,9 @@ app.post("/register", async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).json({ error: "Username and password are required" });
+    return res
+      .status(400)
+      .json({ error: "Username and password are required" });
   }
 
   try {
@@ -50,7 +69,9 @@ app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).json({ error: "Username and password are required" });
+    return res
+      .status(400)
+      .json({ error: "Username and password are required" });
   }
 
   try {
@@ -67,9 +88,13 @@ app.post("/login", async (req, res) => {
     }
 
     // Generate a JWT token
-    const token = jwt.sign({ id: userDoc._id, username: userDoc.username }, JWT_SECRET, {
-      expiresIn: "1h", // Token expires in 1 hour
-    });
+    const token = jwt.sign(
+      { id: userDoc._id, username: userDoc.username },
+      JWT_SECRET,
+      {
+        expiresIn: "1h", // Token expires in 1 hour
+      }
+    );
 
     res.status(200).json({ message: "Login successful", token });
   } catch (err) {
@@ -78,26 +103,24 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Middleware to verify JWT
-const verifyToken = (req, res, next) => {
-  const token = req.headers["authorization"]?.split(" ")[1];
-
-  if (!token) {
-    return res.status(403).json({ error: "No token provided" });
-  }
-
+app.get("/profile", verifyToken, async (req, res) => {
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded;
-    next();
+    const user = await User.findById(req.user.id).select("-password"); // Exclude the password field
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.status(200).json({ message: "Profile fetched successfully", user });
   } catch (err) {
-    return res.status(401).json({ error: "Unauthorized" });
+    console.error("Error fetching profile:", err);
+    return res.status(500).json({ error: "Failed to fetch profile" });
   }
-};
+});
 
 // Example protected route
-app.post("/create-post", verifyToken, (req, res) => {
-  res.status(200).json({ message: "Post created successfully", user: req.user });
+app.post("/create", verifyToken, (req, res) => {
+  res
+    .status(200)
+    .json({ message: "Post created successfully", user: req.user });
 });
 
 // Start the server

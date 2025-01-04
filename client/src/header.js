@@ -1,9 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     // Check if a token exists in localStorage
@@ -17,28 +18,44 @@ export default function Header() {
     navigate("/login"); // Redirect to the login page
   }
 
+  const isProfilePage = location.pathname === "/profile";
+
   return (
-    <header>
+    <header
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: "10px 20px",
+        backgroundColor: "#f8f9fa",
+      }}
+    >
       <Link to="/" className="logo">
         <h1>- Post Go -</h1>
       </Link>
       <nav>
-        {isLoggedIn ? (
+        {isLoggedIn && isProfilePage ? (
           <>
             <Link to="/create">
               <button type="button" className="btn btn-outline-dark">
                 Create a Post
               </button>
             </Link>
-            <Link>
             <button
               type="button"
               className="btn btn-outline-danger"
-              onClick={handleLogout} // Use handleLogout here
+              onClick={handleLogout}
               style={{ marginLeft: "10px" }}
             >
               Logout
             </button>
+          </>
+        ) : isLoggedIn ? (
+          <>
+            <Link to="/profile">
+              <button type="button" className="btn btn-outline-dark">
+                Profile
+              </button>
             </Link>
           </>
         ) : (

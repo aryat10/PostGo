@@ -7,6 +7,7 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ProfilePage from "./pages/ProfilePage";
 // import LoginPage from "./pages/LoginPage";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <Routes>
       <Route index element={<Layout />} />
       <Route index element={<IndexPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
       <Route path="/login" element={
         <LoginPage />
       }/>
