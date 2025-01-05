@@ -27,12 +27,14 @@ export default function Header() {
         justifyContent: "space-between",
         alignItems: "center",
         padding: "10px 20px",
-        backgroundColor: "#f8f9fa",
+        // backgroundColor: "#f8f9fa",
       }}
     >
       <Link to="/" className="logo">
-        <h1>- Post Go -</h1>
+        <h1>Post-Go📮</h1>
+        
       </Link>
+     
       <nav>
         {isLoggedIn && isProfilePage ? (
           <>

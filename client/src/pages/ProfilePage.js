@@ -47,11 +47,11 @@ export default function ProfilePage() {
           justifyContent: "space-between",
           alignItems: "center",
           padding: "10px 20px",
-          background: "#a2a8d3",
-          color: "#113f67",
+          background: "#393e46",
+          color: "#f2f2f2",
         }}
       >
-        <h1>Welcome back ! {user?.username || "Guest"} </h1>
+        <h1>Welcome {user?.username || "Guest"} </h1>
 
         <div>
           <button
@@ -84,7 +84,7 @@ export default function ProfilePage() {
           </button>
         </div>
       </header>
-      <main>
+      <main style={{ background: "" }}>
         <h2>This is your profile page 👽</h2>
         {user ? (
           <div>
