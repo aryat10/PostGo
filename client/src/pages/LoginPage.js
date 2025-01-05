@@ -38,71 +38,106 @@ export default function LoginPage() {
     }
   }
 
+  const containerStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    backgroundColor: "#f8f9fa",
+  };
+
+  const cardStyle = {
+    maxWidth: "450px",
+    width: "100%",
+    padding: "20px",
+    borderRadius: "8px",
+    backgroundColor: "#fff",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+  };
+
+  const inputStyle = {
+    width: "100%",
+    padding: "10px",
+    margin: "8px 0",
+    borderRadius: "5px",
+    border: "1px solid #ced4da",
+    fontSize: "16px",
+  };
+
+  const buttonStyle = {
+    width: "100%",
+    padding: "12px",
+    backgroundColor: "#007bff",
+    color: "#fff",
+    fontSize: "16px",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    marginTop: "15px",
+  };
+
+  const labelStyle = {
+    marginBottom: "5px",
+    fontSize: "14px",
+    fontWeight: "bold",
+    color: "#495057",
+  };
+
+  const checkboxContainerStyle = {
+    display: "flex",
+    alignItems: "center",
+    marginTop: "10px",
+  };
+
+  const errorStyle = {
+    color: "#dc3545",
+    backgroundColor: "#f8d7da",
+    padding: "10px",
+    borderRadius: "5px",
+    marginBottom: "15px",
+    textAlign: "center",
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        backgroundColor: "#f8f9fa",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "450px",
-          width: "100%",
-          padding: "20px",
-          borderRadius: "8px",
-          backgroundColor: "#fff",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <h2 className="text-center mb-3">Welcome back to Post-Go </h2>
-        <p className="text-center text-muted mb-4">
+    <div style={containerStyle}>
+      <div style={cardStyle}>
+        <h2 style={{ textAlign: "center", marginBottom: "15px" }}>
+          Welcome back to Post-Go
+        </h2>
+        <p style={{ textAlign: "center", color: "#6c757d", marginBottom: "20px" }}>
           Let's spread your blog/post again.
         </p>
         <form onSubmit={login}>
-          {error && (
-            <div className="alert alert-danger" role="alert">
-              {error}
-            </div>
-          )}
-          <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">
+          {error && <div style={errorStyle}>{error}</div>}
+          <div>
+            <label htmlFor="username" style={labelStyle}>
               UserName
             </label>
             <input
               type="text"
-              className="form-control"
-              id="exampleInputEmail1"
+              id="username"
+              style={inputStyle}
               value={username}
               onChange={(ev) => setUsername(ev.target.value)}
             />
           </div>
-          <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">
+          <div>
+            <label htmlFor="password" style={labelStyle}>
               Password
             </label>
             <input
               type="password"
-              className="form-control"
-              id="exampleInputPassword1"
+              id="password"
+              style={inputStyle}
               value={password}
               onChange={(ev) => setPassword(ev.target.value)}
             />
           </div>
-          <div className="mb-3 form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="exampleCheck1"
-            />
-            <label className="form-check-label" htmlFor="exampleCheck1">
-              All details are filled ✅
-            </label>
+          <div style={checkboxContainerStyle}>
+            <input type="checkbox" id="detailsCheck" style={{ marginRight: "8px" }} />
+            <label htmlFor="detailsCheck">All details are filled ✅</label>
           </div>
-          <button type="submit" className="btn btn-primary w-100">
+          <button type="submit" style={buttonStyle}>
             Submit
           </button>
         </form>

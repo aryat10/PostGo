@@ -27,92 +27,115 @@ export default function RegisterPage() {
     }
   }
 
+  const containerStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    backgroundColor: "#f0f2f5",
+    margin: "0",
+  };
+
+  const cardStyle = {
+    maxWidth: "480px",
+    width: "100%",
+    padding: "25px",
+    borderRadius: "10px",
+    backgroundColor: "#fff",
+    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+    textAlign: "center",
+  };
+
+  const inputStyle = {
+    width: "100%",
+    padding: "10px",
+    margin: "10px 0",
+    borderRadius: "5px",
+    border: "1px solid #ced4da",
+    fontSize: "16px",
+  };
+
+  const labelStyle = {
+    textAlign: "left",
+    display: "block",
+    margin: "10px 0 5px",
+    fontSize: "14px",
+    color: "#495057",
+  };
+
+  const buttonStyle = {
+    width: "100%",
+    padding: "12px",
+    fontSize: "16px",
+    color: "#fff",
+    backgroundColor: "#007bff",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    marginTop: "15px",
+  };
+
+  const checkboxStyle = {
+    marginRight: "10px",
+  };
+
+  const successMessageStyle = {
+    marginTop: "20px",
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        backgroundColor: "#f8f9fa",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "490px",
-          width: "100%",
-          padding: "20px",
-          borderRadius: "8px",
-          backgroundColor: "#fff",
-          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-        }}
-      >
+    <div style={containerStyle}>
+      <div style={cardStyle}>
         {registrationSuccess ? (
-          <div style={{ textAlign: "center", margin: "20px 0" }}>
+          <div>
             <h2>🎉 Registration Successful! 🎉</h2>
-            <p>Let's get you started with your Post !!!</p>
+            <p style={successMessageStyle}>Let's get you started with your Post !!!</p>
             <Link to="/login">
-              <button
-                style={{
-                  padding: "10px 20px",
-                  fontSize: "16px",
-                  color: "#fff",
-                  backgroundColor: "#007bff",
-                  border: "none",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                  marginTop: "20px",
-                }}
-              >
-                Go to Login
-              </button>
+              <button style={buttonStyle}>Go to Login</button>
             </Link>
           </div>
         ) : (
           <>
-            <h2 className="text-center mb-3">Welcome to Post-Go 👽📤</h2>
-            <p className="text-center text-muted mb-4">
+            <h2>Welcome to Post-Go 👽📤</h2>
+            <p style={{ color: "#6c757d", marginBottom: "20px" }}>
               Start sharing your amazing blogs/posts today!
             </p>
             <form onSubmit={register}>
-              <div className="mb-3">
-                <label htmlFor="registerUserName" className="form-label">
-                  UserName
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="registerUserName"
-                  value={username}
-                  onChange={(ev) => setUsername(ev.target.value)}
-                />
-              </div>
+              <label style={labelStyle} htmlFor="registerUserName">
+                UserName
+              </label>
+              <input
+                type="text"
+                id="registerUserName"
+                style={inputStyle}
+                value={username}
+                onChange={(ev) => setUsername(ev.target.value)}
+                required
+              />
 
-              <div className="mb-3">
-                <label htmlFor="registerPassword" className="form-label">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="registerPassword"
-                  value={password}
-                  onChange={(ev) => setPassword(ev.target.value)}
-                />
-              </div>
+              <label style={labelStyle} htmlFor="registerPassword">
+                Password
+              </label>
+              <input
+                type="password"
+                id="registerPassword"
+                style={inputStyle}
+                value={password}
+                onChange={(ev) => setPassword(ev.target.value)}
+                required
+              />
 
-              <div className="mb-3 form-check">
+              <div style={{ margin: "10px 0", textAlign: "left" }}>
                 <input
                   type="checkbox"
-                  className="form-check-input"
-                  id="exampleCheck1"
+                  id="detailsCheck"
+                  style={checkboxStyle}
+                  required
                 />
-                <label className="form-check-label" htmlFor="exampleCheck1">
-                  All details are filled ✅
-                </label>
+                <label htmlFor="detailsCheck">All details are filled ✅</label>
               </div>
 
-              <button type="submit" className="btn btn-primary w-100">
+              <button type="submit" style={buttonStyle}>
                 Register
               </button>
             </form>
