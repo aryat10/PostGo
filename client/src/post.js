@@ -1,11 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Post() {
   return (
     <div className="post">
-     
       {/* Post 1 */}
-      
+
       <div className="post-item">
         <img
           src="https://techcrunch.com/wp-content/uploads/2024/12/rivian-sirius-xm.jpg?resize=1280,985"
@@ -91,6 +91,11 @@ export default function Post() {
           </button>
         </div>
       </div>
+      <Link to="/login">
+        <button type="button" className="btn btn-outline-dark">
+          Login
+        </button>
+      </Link>
     </div>
   );
 }

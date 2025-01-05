@@ -51,7 +51,7 @@ export default function ProfilePage() {
           color: "#f2f2f2",
         }}
       >
-        <h1>Welcome {user?.username || "Guest"} </h1>
+        <h1>Welcome {user?.username || "Guest"} to Post-Go📮  </h1>
 
         <div>
           <button
