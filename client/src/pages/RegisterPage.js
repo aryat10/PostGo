@@ -50,7 +50,7 @@ export default function RegisterPage() {
         {registrationSuccess ? (
           <div style={{ textAlign: "center", margin: "20px 0" }}>
             <h2>🎉 Registration Successful! 🎉</h2>
-            <p>You can now start posting amazing content!</p>
+            <p>Let's get you started with your Post !!!</p>
             <Link to="/login">
               <button
                 style={{
