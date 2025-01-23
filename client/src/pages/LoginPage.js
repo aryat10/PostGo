@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -141,6 +142,9 @@ export default function LoginPage() {
             Submit
           </button>
         </form>
+        <Link to="/register">
+          Don't have an account? Register here.
+        </Link>
       </div>
     </div>
   );
