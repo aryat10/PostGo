@@ -1,2 +1,2 @@
 ## PostGo
-Somethibg Cooing 👨🏼‍🍳🫕
+# Something Cooking 👨🏼‍🍳🫕
