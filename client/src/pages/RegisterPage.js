@@ -96,7 +96,7 @@ export default function RegisterPage() {
           </div>
         ) : (
           <>
-            <h2>Welcome to Post-Go 👽📤</h2>
+            <h2>Welcome to Post-Go 👽📮</h2>
             <p style={{ color: "#6c757d", marginBottom: "20px" }}>
               Start sharing your amazing blogs/posts today!
             </p>

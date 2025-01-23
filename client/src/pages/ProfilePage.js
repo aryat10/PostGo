@@ -171,13 +171,17 @@ export default function ProfilePage() {
       <footer
         style={{
           textAlign: "center",
-          padding: "15px",
+          padding: "30px 20px",
           backgroundColor: "#333",
           color: "#fff",
+          marginTop: "50px",
         }}
       >
-        <p style={{ fontSize: "1rem" }}>
+        <p style={{ fontSize: "1.2rem", marginBottom: "10px" }}>
           Made with ❤️ by Aryat
+        </p>
+        <p style={{ fontSize: "0.9rem" }}>
+          Transforming ideas into reality, one post at a time.
         </p>
       </footer>
     </div>

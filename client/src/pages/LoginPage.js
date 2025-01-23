@@ -102,7 +102,7 @@ export default function LoginPage() {
     <div style={containerStyle}>
       <div style={cardStyle}>
         <h2 style={{ textAlign: "center", marginBottom: "15px" }}>
-          Welcome back to Post-Go
+          Welcome back to Post-Go 👽📮
         </h2>
         <p style={{ textAlign: "center", color: "#6c757d", marginBottom: "20px" }}>
           Let's spread your blog/post again.
