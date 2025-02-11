@@ -168,6 +168,9 @@ export default function HomePage() {
         </p>
         <p style={{ fontSize: "0.9rem" }}>
           Transforming ideas into reality, one post at a time.
+          <br></br>
+          Connect with me on <a href="https://github.com/aryat10">Github</a> {" "}
+          <a href="https://www.linkedin.com/in/aryatsrivastavaweb/">LinkedIn</a> {"🧑🏼‍💻"}
         </p>
       </footer>
     </div>
