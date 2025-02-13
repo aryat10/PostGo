@@ -17,12 +17,8 @@ function App() {
       <Route index element={<Layout />} />
       <Route index element={<IndexPage />} />
       <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/login" element={
-        <LoginPage />
-      }/>
-      <Route path="/register" element={
-        <RegisterPage />
-      }/>
+      <Route path="/login" element={<LoginPage />}/>
+      <Route path="/register" element={<RegisterPage />}/>
       <Route path="/create" element={<CreatePostPage/>} />
     </Routes>
   );
