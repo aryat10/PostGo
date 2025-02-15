@@ -26,12 +26,16 @@ const CreatePost = ({ token }) => {
     form.append("image", formData.image);
 
     try {
-      const response = await axios.post("http://localhost:4000/create-post", form, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:4000/create-post",
+        form,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setMessage(response.data.message);
       setFormData({ heading: "", content: "", image: null });
     } catch (error) {
@@ -101,66 +105,69 @@ const CreatePost = ({ token }) => {
   };
 
   return (
-   <>
-         <div style={styles.container}>
-      <h2 style={styles.heading}>Create a New Post</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={styles.formGroup}>
-          <label style={styles.label} htmlFor="heading">
-            Heading
-          </label>
-          <input
-            style={styles.input}
-            type="text"
-            id="heading"
-            name="heading"
-            value={formData.heading}
-            onChange={handleChange}
-            placeholder="Enter post heading"
-            required
-          />
-        </div>
-        <div style={styles.formGroup}>
-          <label style={styles.label} htmlFor="content">
-            Content
-          </label>
-          <textarea
-            style={styles.textarea}
-            id="content"
-            name="content"
-            value={formData.content}
-            onChange={handleChange}
-            placeholder="Write your content here..."
-            required
-          />
-        </div>
-        <div style={styles.formGroup}>
-          <label style={styles.label} htmlFor="image">
-            Upload Image
-          </label>
-          <input
-            style={styles.input}
-            type="file"
-            id="image"
-            name="image"
-            onChange={handleChange}
-            accept="image/*"
-            required
-          />
-        </div>
-        <button
-          style={styles.button}
-          onMouseOver={(e) => (e.target.style.backgroundColor = styles.buttonHover.backgroundColor)}
-          onMouseOut={(e) => (e.target.style.backgroundColor = styles.button.backgroundColor)}
-        >
-          Post
-        </button>
-      </form>
-      {message && <p style={styles.message}>{message}</p>}
-    </div> 
-    
-  </>
-    
+    <>
+      <div style={styles.container}>
+        <h2 style={styles.heading}>Create a New Post</h2>
+        <form onSubmit={handleSubmit}>
+          <div style={styles.formGroup}>
+            <label style={styles.label} htmlFor="heading">
+              Heading
+            </label>
+            <input
+              style={styles.input}
+              type="text"
+              id="heading"
+              name="heading"
+              value={formData.heading}
+              onChange={handleChange}
+              placeholder="Enter post heading"
+              required
+            />
+          </div>
+          <div style={styles.formGroup}>
+            <label style={styles.label} htmlFor="content">
+              Content
+            </label>
+            <textarea
+              style={styles.textarea}
+              id="content"
+              name="content"
+              value={formData.content}
+              onChange={handleChange}
+              placeholder="Write your content here..."
+              required
+            />
+          </div>
+          <div style={styles.formGroup}>
+            <label style={styles.label} htmlFor="image">
+              Upload Image
+            </label>
+            <input
+              style={styles.input}
+              type="file"
+              id="image"
+              name="image"
+              onChange={handleChange}
+              accept="image/*"
+              required
+            />
+          </div>
+          <button
+            style={styles.button}
+            onMouseOver={(e) =>
+              (e.target.style.backgroundColor =
+                styles.buttonHover.backgroundColor)
+            }
+            onMouseOut={(e) =>
+              (e.target.style.backgroundColor = styles.button.backgroundColor)
+            }
+          >
+            Post
+          </button>
+        </form>
+        {message && <p style={styles.message}>{message}</p>}
+      </div>
+    </>
   );
 };
 
