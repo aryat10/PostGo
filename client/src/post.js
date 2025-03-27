@@ -22,16 +22,23 @@ export default function HomePage() {
           borderBottom: "1px solid #e0e0e0",
         }}
       >
-        <h1
+        <Link
+          to="/"
           style={{
-            fontSize: "1.5rem",
-            fontWeight: "700",
-            margin: 0,
-            color: "#333",
+            textDecoration: "none", // Remove the underline with !important
           }}
         >
-          PostGO
-        </h1>
+          <h1
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "700",
+              margin: 0,
+              color: "#333",
+            }}
+          >
+            PostGO
+          </h1>
+        </Link>
         <div style={{ display: "flex", gap: "10px" }}>
           <Link to="/login">
             <button
@@ -329,7 +336,6 @@ export default function HomePage() {
             "🤝 Connect with like-minded individuals.",
             "📈 Grow your audience effortlessly!",
             "🎨 Personalize your profile to showcase style",
-            "🖼️ Share your moments and ideas with the world",
           ].map((text, index) => (
             <div
               key={index}

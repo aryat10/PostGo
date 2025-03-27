@@ -47,16 +47,18 @@ export default function RegisterPage() {
           borderBottom: "1px solid #e0e0e0",
         }}
       >
-        <h1
-          style={{
-            fontSize: "1.5rem",
-            fontWeight: "700",
-            margin: 0,
-            color: "#333",
-          }}
-        >
-          PostGO
-        </h1>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <h1
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "700",
+              margin: 0,
+              color: "#333",
+            }}
+          >
+            PostGO
+          </h1>
+        </Link>
         <div style={{ display: "flex", gap: "10px" }}>
           <Link to="/login">
             <button
@@ -100,7 +102,6 @@ export default function RegisterPage() {
         <div style={{ maxWidth: "500px", textAlign: "left" }}>
           {registrationSuccess ? (
             <>
-              {/* Success Message */}
               <h2
                 style={{
                   fontSize: "2.8rem",
@@ -138,11 +139,13 @@ export default function RegisterPage() {
                   }}
                   onMouseOver={(e) => (
                     (e.target.style.transform = "translateY(-3px)"),
-                    (e.target.style.boxShadow = "0 6px 16px rgba(0, 123, 255, 0.4)")
+                    (e.target.style.boxShadow =
+                      "0 6px 16px rgba(0, 123, 255, 0.4)")
                   )}
                   onMouseOut={(e) => (
                     (e.target.style.transform = "translateY(0)"),
-                    (e.target.style.boxShadow = "0 4px 12px rgba(0, 123, 255, 0.3)")
+                    (e.target.style.boxShadow =
+                      "0 4px 12px rgba(0, 123, 255, 0.3)")
                   )}
                 >
                   Go to Login
@@ -151,7 +154,6 @@ export default function RegisterPage() {
             </>
           ) : (
             <>
-              {/* Main Heading */}
               <h2
                 style={{
                   fontSize: "2.8rem",
@@ -171,10 +173,8 @@ export default function RegisterPage() {
                 >
                   Join
                 </span>{" "}
-                PostGO! 
+                PostGO!
               </h2>
-
-              {/* Tagline */}
               <p
                 style={{
                   fontSize: "1.1rem",
@@ -186,9 +186,14 @@ export default function RegisterPage() {
               >
                 Start sharing your amazing blogs/posts today!
               </p>
-
-              {/* Registration Form */}
-              <form onSubmit={register} style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+              <form
+                onSubmit={register}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "15px",
+                }}
+              >
                 <div>
                   <label
                     htmlFor="registerUserName"
@@ -216,11 +221,13 @@ export default function RegisterPage() {
                       border: "1px solid #e0e0e0",
                       borderRadius: "5px",
                       outline: "none",
-                      transition: "border-color 0.3s ease, box-shadow 0.3s ease",
+                      transition:
+                        "border-color 0.3s ease, box-shadow 0.3s ease",
                     }}
                     onFocus={(e) => (
                       (e.target.style.borderColor = "#007bff"),
-                      (e.target.style.boxShadow = "0 0 5px rgba(0, 123, 255, 0.3)")
+                      (e.target.style.boxShadow =
+                        "0 0 5px rgba(0, 123, 255, 0.3)")
                     )}
                     onBlur={(e) => (
                       (e.target.style.borderColor = "#e0e0e0"),
@@ -228,7 +235,6 @@ export default function RegisterPage() {
                     )}
                   />
                 </div>
-
                 <div>
                   <label
                     htmlFor="registerPassword"
@@ -256,11 +262,13 @@ export default function RegisterPage() {
                       border: "1px solid #e0e0e0",
                       borderRadius: "5px",
                       outline: "none",
-                      transition: "border-color 0.3s ease, box-shadow 0.3s ease",
+                      transition:
+                        "border-color 0.3s ease, box-shadow 0.3s ease",
                     }}
                     onFocus={(e) => (
                       (e.target.style.borderColor = "#007bff"),
-                      (e.target.style.boxShadow = "0 0 5px rgba(0, 123, 255, 0.3)")
+                      (e.target.style.boxShadow =
+                        "0 0 5px rgba(0, 123, 255, 0.3)")
                     )}
                     onBlur={(e) => (
                       (e.target.style.borderColor = "#e0e0e0"),
@@ -268,7 +276,6 @@ export default function RegisterPage() {
                     )}
                   />
                 </div>
-
                 <div
                   style={{
                     display: "flex",
@@ -294,7 +301,6 @@ export default function RegisterPage() {
                     All details are filled ✅
                   </label>
                 </div>
-
                 <button
                   type="submit"
                   style={{
@@ -311,18 +317,18 @@ export default function RegisterPage() {
                   }}
                   onMouseOver={(e) => (
                     (e.target.style.transform = "translateY(-3px)"),
-                    (e.target.style.boxShadow = "0 6px 16px rgba(0, 123, 255, 0.4)")
+                    (e.target.style.boxShadow =
+                      "0 6px 16px rgba(0, 123, 255, 0.4)")
                   )}
                   onMouseOut={(e) => (
                     (e.target.style.transform = "translateY(0)"),
-                    (e.target.style.boxShadow = "0 4px 12px rgba(0, 123, 255, 0.3)")
+                    (e.target.style.boxShadow =
+                      "0 4px 12px rgba(0, 123, 255, 0.3)")
                   )}
                 >
                   Register
                 </button>
               </form>
-
-              {/* Link to Login */}
               <p
                 style={{
                   fontSize: "0.9rem",
@@ -352,12 +358,16 @@ export default function RegisterPage() {
 
         {/* Right Side - Custom Image */}
         <img
-          src="/images/8805887.jpg" // Assumes the image is in the public/images folder
-          alt="Register illustration"
+          src="https://img.freepik.com/free-vector/resume-concept-illustration_114360-103.jpg?t=st=1743107549~exp=1743111149~hmac=03d98ead6e9fd656732eaae614ea5df6202d97fb41879430c36462c4f18934be&w=740"
+          alt={
+            registrationSuccess
+              ? "Success illustration"
+              : "Register illustration"
+          }
           style={{
             maxWidth: "500px",
             width: "100%",
-            height: "300px", // Added height to ensure visibility
+            height: "400px",
             borderRadius: "15px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
             objectFit: "cover",
@@ -382,7 +392,6 @@ export default function RegisterPage() {
             margin: "0 auto",
           }}
         >
-          {/* Main Footer Text */}
           <p
             style={{
               fontSize: "1.3rem",
@@ -398,8 +407,6 @@ export default function RegisterPage() {
             <span style={{ fontSize: "1.5rem" }}>❤️</span>
             <span>by Aryat</span>
           </p>
-
-          {/* Tagline */}
           <p
             style={{
               fontSize: "1rem",
@@ -410,8 +417,6 @@ export default function RegisterPage() {
           >
             Transforming ideas into reality, one post at a time.
           </p>
-
-          {/* Social Links */}
           <div
             style={{
               display: "flex",
@@ -490,8 +495,6 @@ export default function RegisterPage() {
               LinkedIn
             </a>
           </div>
-
-          {/* Additional Info */}
           <p
             style={{
               fontSize: "0.85rem",

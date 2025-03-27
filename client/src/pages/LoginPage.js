@@ -58,16 +58,23 @@ export default function LoginPage() {
           borderBottom: "1px solid #e0e0e0",
         }}
       >
-        <h1
+        <Link
+          to="/"
           style={{
-            fontSize: "1.5rem",
-            fontWeight: "700",
-            margin: 0,
-            color: "#333",
+            textDecoration: "none", // Remove the underline with !important
           }}
         >
-          PostGO
-        </h1>
+          <h1
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: "700",
+              margin: 0,
+              color: "#333",
+            }}
+          >
+            PostGO
+          </h1>
+        </Link>
         <div style={{ display: "flex", gap: "10px" }}>
           <Link to="/register">
             <button
@@ -129,7 +136,7 @@ export default function LoginPage() {
             >
               Welcome
             </span>{" "}
-            Back! 
+            Back!
           </h2>
 
           {/* Tagline */}
@@ -146,7 +153,10 @@ export default function LoginPage() {
           </p>
 
           {/* Login Form */}
-          <form onSubmit={login} style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+          <form
+            onSubmit={login}
+            style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+          >
             {error && (
               <div
                 style={{
@@ -321,12 +331,12 @@ export default function LoginPage() {
 
         {/* Right Side - Custom Image */}
         <img
-          src="/images/8805887.jpg" // Assumes the image is in the public/images folder
+          src="https://img.freepik.com/free-vector/privacy-policy-concept-illustration_114360-7853.jpg?t=st=1743105310~exp=1743108910~hmac=083464849bf3c85311605b18c4c6457442bc2cbab454c4466467e6a117b2882f&w=740" // Assumes the image is in the public/images folder
           alt="Login illustration"
           style={{
             maxWidth: "500px",
             width: "100%",
-            height: "300px", // Added height to ensure visibility
+            height: "400px", // Added height to ensure visibility
             borderRadius: "15px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
             objectFit: "cover",
