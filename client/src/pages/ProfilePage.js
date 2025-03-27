@@ -252,14 +252,14 @@ export default function ProfilePage() {
 
         {/* Right Side - Illustration */}
         <img
-          src="https://img.freepik.com/free-vector/profile-interface-concept-illustration_114360-1708.jpg?t=st=1743105053~exp=1743108653~hmac=9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e&w=740"
+          src="https://img.freepik.com/free-vector/profile-interface-concept-illustration_114360-2850.jpg?t=st=1743111480~exp=1743115080~hmac=16ad16474b133f918f16593e2d894b32913fe5b891cb7ef563f56365c156d573&w=740"
           alt="Profile illustration"
           style={{
             maxWidth: "500px",
             width: "100%",
             height: "400px",
             borderRadius: "15px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            boxShadow: "0 0px 0px rgba(0, 0, 0, 0.1)",
             objectFit: "cover",
           }}
         />
