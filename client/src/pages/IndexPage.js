@@ -1,9 +1,9 @@
-import Post from "../post";
+import HomePage from "../post";
 
 export default function Indexpage() {
   return (
     <>
-      <Post />
+      <HomePage />
       
     </>
   );

@@ -131,17 +131,17 @@ export default function HomePage() {
           {/* Main Heading with Colored Words */}
           <h2
             style={{
-              fontSize: "2.8rem", // Slightly larger for impact
+              fontSize: "2.8rem",
               fontWeight: "700",
               marginBottom: "25px",
               lineHeight: "1.3",
-              letterSpacing: "-0.5px", // Tighter letter spacing for a modern look
+              letterSpacing: "-0.5px",
             }}
           >
             <span
               style={{
-                color: "#007bff", // Blue for "Share"
-                background: "linear-gradient(90deg, #007bff, #00c4ff)", // Gradient for a modern touch
+                color: "#007bff",
+                background: "linear-gradient(90deg, #007bff, #00c4ff)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -151,7 +151,7 @@ export default function HomePage() {
             Your Thoughts and{" "}
             <span
               style={{
-                color: "#007bff", // Blue for "Connect"
+                color: "#007bff",
                 background: "linear-gradient(90deg, #007bff, #00c4ff)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -162,8 +162,8 @@ export default function HomePage() {
             with{" "}
             <span
               style={{
-                color: "#007bff", // Coral for "the World"
-                background: "linear-gradient(90deg, #007bff, #00c4ff)",
+                color: "#ff6f61",
+                background: "linear-gradient(90deg, #ff6f61, #ff9f80)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}
@@ -179,7 +179,7 @@ export default function HomePage() {
               color: "#555",
               marginBottom: "25px",
               lineHeight: "1.7",
-              fontWeight: "300", // Lighter font weight for a softer look
+              fontWeight: "300",
             }}
           >
             Easily register, create, and share your blogs. Engage with others by
@@ -207,12 +207,12 @@ export default function HomePage() {
                   padding: "12px 35px",
                   fontSize: "1.1rem",
                   color: "#fff",
-                  background: "linear-gradient(90deg, #007bff, #00c4ff)", // Gradient background
+                  background: "linear-gradient(90deg, #007bff, #00c4ff)",
                   border: "none",
-                  borderRadius: "8px", // Softer corners
+                  borderRadius: "8px",
                   cursor: "pointer",
                   transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  boxShadow: "0 4px 12px rgba(0, 123, 255, 0.3)", // Subtle shadow
+                  boxShadow: "0 4px 12px rgba(0, 123, 255, 0.3)",
                 }}
                 onMouseOver={(e) => (
                   (e.target.style.transform = "translateY(-3px)"),
@@ -268,36 +268,36 @@ export default function HomePage() {
               fontStyle: "italic",
             }}
           >
-            *No credit card required. Cancel anytime.
+            *Be a part of PostGO fam🩷
           </p>
         </div>
 
-        {/* Right Side - Custom Image Placeholder */}
-        <div
+        {/* Right Side - Custom Image */}
+        <img
+          src="https://img.freepik.com/free-vector/hand-drawn-essay-illustration_23-2150293914.jpg?t=st=1743069511~exp=1743073111~hmac=866259517bc459180bac0fac0d68bdb9ed55a9f985c1f26993bea70c6c19c9fb&w=740" // Reference the image from the public folder
+          alt="Blogging illustration"
           style={{
             maxWidth: "500px",
             width: "100%",
-            height: "300px",
-            backgroundColor: "#e0e0e0",
             borderRadius: "15px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            boxShadow: "0 4px 8px rgba(255, 250, 250, 0.1)",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            objectFit: "cover",
           }}
-        >
-          <p style={{ color: "#666", fontSize: "1rem" }}>
-            [Your Custom Image Here]
-          </p>
-        </div>
+        />
       </main>
 
       {/* Features Section */}
-      {/* <section style={{ padding: "60px 20px", textAlign: "center" }}>
+      <section style={{ padding: "60px 20px", textAlign: "center" }}>
         <h2
-          style={{ fontSize: "2.5rem", marginBottom: "20px", color: "#333" }}
+          style={{
+            fontSize: "2.5rem",
+            fontWeight: "700",
+            marginBottom: "20px",
+            color: "#333",
+            letterSpacing: "-0.5px",
+          }}
         >
-          Why Post Go?
+          Why PostGO?
         </h2>
         <p
           style={{
@@ -306,9 +306,11 @@ export default function HomePage() {
             marginBottom: "40px",
             maxWidth: "800px",
             marginInline: "auto",
+            color: "#555",
+            fontWeight: "300",
           }}
         >
-          Post Go is your one-stop platform for sharing ideas, exploring trends,
+          PostGO is your one-stop platform for sharing ideas, exploring trends,
           and connecting with a like-minded community. Join us today and enjoy:
         </p>
         <div
@@ -331,38 +333,42 @@ export default function HomePage() {
           ].map((text, index) => (
             <div
               key={index}
-    style={{
-      backgroundColor: "#f5f5f5",
-      borderRadius: "10px",
-      padding: "20px",
-      boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-      transition: "transform 0.3s, box-shadow 0.3s",
-      cursor: "pointer",
-    }}
-    onMouseOver={(e) => {
-      e.target.style.transform = "scale(1.05)";
-      e.target.style.boxShadow = "0 8px 16px rgba(0,0,0,0.2)";
-    }}
-    onMouseOut={(e) => {
-      e.target.style.transform = "scale(1)";
-      e.target.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
-    }}
-  >
-    {text}
-  </div>
+              style={{
+                backgroundColor: "#f5f5f5",
+                borderRadius: "10px",
+                padding: "20px",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                cursor: "pointer",
+                fontSize: "1rem",
+                color: "#333",
+                fontWeight: "400",
+                lineHeight: "1.5",
+              }}
+              onMouseOver={(e) => (
+                (e.target.style.transform = "scale(1.05)"),
+                (e.target.style.boxShadow = "0 8px 16px rgba(0, 0, 0, 0.2)")
+              )}
+              onMouseOut={(e) => (
+                (e.target.style.transform = "scale(1)"),
+                (e.target.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)")
+              )}
+            >
+              {text}
+            </div>
           ))}
         </div>
-      </section> */}
+      </section>
 
       {/* Footer Section */}
       <footer
         style={{
           padding: "40px 20px",
-          background: "linear-gradient(135deg, #333 0%, #1a1a1a 100%)", // Gradient background
+          background: "linear-gradient(135deg, #333 0%, #1a1a1a 100%)",
           color: "#fff",
           marginTop: "50px",
           textAlign: "center",
-          borderTop: "1px solid rgba(255, 255, 255, 0.1)", // Subtle top border
+          borderTop: "1px solid rgba(255, 255, 255, 0.1)",
         }}
       >
         <div
