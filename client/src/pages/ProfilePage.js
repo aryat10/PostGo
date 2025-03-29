@@ -385,7 +385,7 @@ export default function ProfilePage() {
                 transition: "background-color 0.3s ease, transform 0.3s ease",
               }}
               onMouseOver={(e) => (
-                (e.target.style.backgroundColor = "rgba(255, 255, 255, 0.2)"),
+                (e.target.style.backgroundColor = "rgba(255, 255, 255, 0.2)")
                 (e.target.style.transform = "scale(1.05)")
               )}
               onMouseOut={(e) => (
