@@ -185,7 +185,7 @@ export default function HomePage() {
               color: "#333",
             }}
           >
-            Feed 📮
+            {/* Feed 📮 */}
           </h2>
           {posts.length === 0 ? (
             <p>No posts yet. Be the first to create one!</p>
