@@ -18,14 +18,14 @@ export default function ProfilePage() {
       }
       try {
         
-        const userResponse = await axios.get("http://localhost:4000/profile", {
+        const userResponse = await axios.get("https://postgo-8.onrender.com/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(userResponse.data.user);
 
         // Fetch user's posts
         const postsResponse = await axios.get(
-          `http://localhost:4000/posts/user/${userResponse.data.user._id}`
+          `https://postgo-8.onrender.com/user/${userResponse.data.user._id}`
         );
         setPosts(postsResponse.data);
       } catch (err) {
@@ -292,7 +292,7 @@ export default function ProfilePage() {
                 </p>
                 {post.image && (
                   <img
-                    src={`http://localhost:4000${post.image}`}
+                    src={`https://postgo-8.onrender.com${post.image}`}
                     alt="Post"
                     style={{
                       maxWidth: "100%",

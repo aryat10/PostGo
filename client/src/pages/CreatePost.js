@@ -30,7 +30,7 @@ const CreatePost = ({ token }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/create-post",
+        "https://postgo-8.onrender.com/create-post",
         form,
         {
           headers: {

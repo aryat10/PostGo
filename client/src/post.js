@@ -12,13 +12,13 @@ export default function HomePage() {
       if (token) {
         try {
           
-          const userResponse = await axios.get("http://localhost:4000/profile", {
+          const userResponse = await axios.get("https://postgo-8.onrender.com/profile", {
             headers: { Authorization: `Bearer ${token}` },
           });
           setUser(userResponse.data.user);
 
           
-          const postsResponse = await axios.get("http://localhost:4000/posts");
+          const postsResponse = await axios.get("https://postgo-8.onrender.com/posts");
           setPosts(postsResponse.data);
         } catch (err) {
           console.error("Error fetching data:", err);
@@ -209,7 +209,7 @@ export default function HomePage() {
                 </p>
                 {post.image && (
                   <img
-                    src={`http://localhost:4000${post.image}`}
+                    src={`https://postgo-8.onrender.com${post.image}`}
                     alt="Post"
                     style={{
                       maxWidth: "100%",
