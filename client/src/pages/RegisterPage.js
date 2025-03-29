@@ -358,7 +358,11 @@ export default function RegisterPage() {
 
         {/* Right Side - Custom Image */}
         <img
-          src="https://img.freepik.com/free-vector/resume-concept-illustration_114360-103.jpg?t=st=1743107549~exp=1743111149~hmac=03d98ead6e9fd656732eaae614ea5df6202d97fb41879430c36462c4f18934be&w=740"
+          src={
+            registrationSuccess
+              ? "https://img.freepik.com/free-vector/resume-concept-illustration_114360-103.jpg?t=st=1743107549~exp=1743111149~hmac=03d98ead6e9fd656732eaae614ea5df6202d97fb41879430c36462c4f18934be&w=740"
+              : "https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?t=st=1743235771~exp=1743239371~hmac=0e4965d0f5e07d396c8962d515924fd7dfd64af78eea6272193f809d2e4e1ec1&w=740"
+          }
           alt={
             registrationSuccess
               ? "Success illustration"

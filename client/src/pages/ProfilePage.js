@@ -149,7 +149,8 @@ export default function ProfilePage() {
               letterSpacing: "-0.5px",
             }}
           >
-            Your <span
+            Your{" "}
+            <span
               style={{
                 color: "#007bff",
                 background: "linear-gradient(90deg, #007bff, #00c4ff)",
@@ -158,7 +159,8 @@ export default function ProfilePage() {
               }}
             >
               Profile
-            </span> 👤
+            </span>{" "}
+            👤
           </h2>
           {user ? (
             <div
@@ -284,10 +286,22 @@ export default function ProfilePage() {
                   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                 }}
               >
-                <h4 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "10px" }}>
+                <h4
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "600",
+                    marginBottom: "10px",
+                  }}
+                >
                   {post.title}
                 </h4>
-                <p style={{ fontSize: "1rem", color: "#555", marginBottom: "10px" }}>
+                <p
+                  style={{
+                    fontSize: "1rem",
+                    color: "#555",
+                    marginBottom: "10px",
+                  }}
+                >
                   {post.content}
                 </p>
                 {post.image && (
