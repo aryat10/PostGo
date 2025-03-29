@@ -25,7 +25,7 @@ export default function ProfilePage() {
 
         // Fetch user's posts
         const postsResponse = await axios.get(
-          `https://postgo-8.onrender.com/user/${userResponse.data.user._id}`
+          `https://postgo-8.onrender.com/user/${userResponse.data.user._id}/posts`
         );
         setPosts(postsResponse.data);
       } catch (err) {
