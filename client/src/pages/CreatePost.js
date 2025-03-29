@@ -41,7 +41,7 @@ const CreatePost = ({ token }) => {
       );
       setMessage(response.data.message);
       setFormData({ heading: "", content: "", image: null });
-      setTimeout(() => navigate("/profile"), 2000);
+      setTimeout(() => navigate("/"), 2000); // Redirect to homepage (feed)
     } catch (error) {
       setMessage(error.response?.data?.error || "Failed to create post.");
     }

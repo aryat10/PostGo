@@ -1,7 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function HomePage() {
+  const [posts, setPosts] = useState([]);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUserAndPosts = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          // Fetch user profile
+          const userResponse = await axios.get("http://localhost:4000/profile", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setUser(userResponse.data.user);
+
+          // Fetch all posts for the feed
+          const postsResponse = await axios.get("http://localhost:4000/posts");
+          setPosts(postsResponse.data);
+        } catch (err) {
+          console.error("Error fetching data:", err);
+          localStorage.removeItem("token"); // Clear token if invalid
+        }
+      }
+    };
+    fetchUserAndPosts();
+  }, []);
+
   return (
     <div
       style={{
@@ -40,331 +67,449 @@ export default function HomePage() {
           </h1>
         </Link>
         <div style={{ display: "flex", gap: "10px" }}>
-          <Link to="/login">
-            <button
-              style={{
-                padding: "8px 20px",
-                fontSize: "1rem",
-                color: "#fff",
-                backgroundColor: "#007bff",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer",
-                transition: "background-color 0.3s ease",
-              }}
-              onMouseOver={(e) => (e.target.style.backgroundColor = "#0056b3")}
-              onMouseOut={(e) => (e.target.style.backgroundColor = "#007bff")}
-            >
-              Login
-            </button>
-          </Link>
-          <Link to="/register">
-            <button
-              style={{
-                padding: "8px 20px",
-                fontSize: "1rem",
-                color: "#333",
-                backgroundColor: "#fff",
-                border: "1px solid #333",
-                borderRadius: "5px",
-                cursor: "pointer",
-                transition: "background-color 0.3s ease, color 0.3s ease",
-              }}
-              onMouseOver={(e) => (
-                (e.target.style.backgroundColor = "#333"),
-                (e.target.style.color = "#fff")
-              )}
-              onMouseOut={(e) => (
-                (e.target.style.backgroundColor = "#fff"),
-                (e.target.style.color = "#333")
-              )}
-            >
-              Register
-            </button>
-          </Link>
+          {user ? (
+            <>
+              <Link to="/create">
+                <button
+                  style={{
+                    padding: "8px 20px",
+                    fontSize: "1rem",
+                    color: "#fff",
+                    background: "linear-gradient(90deg, #4CAF50, #66BB6A)",
+                    border: "none",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                    boxShadow: "0 4px 12px rgba(76, 175, 80, 0.3)",
+                  }}
+                  onMouseOver={(e) => (
+                    (e.target.style.transform = "translateY(-3px)"),
+                    (e.target.style.boxShadow = "0 6px 16px rgba(76, 175, 80, 0.4)")
+                  )}
+                  onMouseOut={(e) => (
+                    (e.target.style.transform = "translateY(0)"),
+                    (e.target.style.boxShadow = "0 4px 12px rgba(76, 175, 80, 0.3)")
+                  )}
+                >
+                  Create Post
+                </button>
+              </Link>
+              <Link to="/profile">
+                <button
+                  style={{
+                    padding: "8px 20px",
+                    fontSize: "1rem",
+                    color: "#333",
+                    backgroundColor: "#fff",
+                    border: "1px solid #333",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                    transition: "background-color 0.3s ease, color 0.3s ease",
+                  }}
+                  onMouseOver={(e) => (
+                    (e.target.style.backgroundColor = "#333"),
+                    (e.target.style.color = "#fff")
+                  )}
+                  onMouseOut={(e) => (
+                    (e.target.style.backgroundColor = "#fff"),
+                    (e.target.style.color = "#333")
+                  )}
+                >
+                  Profile
+                </button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/login">
+                <button
+                  style={{
+                    padding: "8px 20px",
+                    fontSize: "1rem",
+                    color: "#fff",
+                    backgroundColor: "#007bff",
+                    border: "none",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                    transition: "background-color 0.3s ease",
+                  }}
+                  onMouseOver={(e) => (e.target.style.backgroundColor = "#0056b3")}
+                  onMouseOut={(e) => (e.target.style.backgroundColor = "#007bff")}
+                >
+                  Login
+                </button>
+              </Link>
+              <Link to="/register">
+                <button
+                  style={{
+                    padding: "8px 20px",
+                    fontSize: "1rem",
+                    color: "#333",
+                    backgroundColor: "#fff",
+                    border: "1px solid #333",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                    transition: "background-color 0.3s ease, color 0.3s ease",
+                  }}
+                  onMouseOver={(e) => (
+                    (e.target.style.backgroundColor = "#333"),
+                    (e.target.style.color = "#fff")
+                  )}
+                  onMouseOut={(e) => (
+                    (e.target.style.backgroundColor = "#fff"),
+                    (e.target.style.color = "#333")
+                  )}
+                >
+                  Register
+                </button>
+              </Link>
+            </>
+          )}
         </div>
       </header>
 
-      {/* Hero Section */}
-      <main
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: "60px 40px",
-          gap: "40px",
-          flexWrap: "wrap",
-        }}
-      >
-        {/* Left Side - Text and Buttons */}
-        <div style={{ maxWidth: "500px", textAlign: "left" }}>
-          {/* Rating and Tagline */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-              marginBottom: "25px",
-            }}
-          >
-            <div style={{ display: "flex", gap: "5px" }}>
-              {[...Array(5)].map((_, i) => (
-                <span
-                  key={i}
-                  style={{
-                    color: "#ffd700",
-                    fontSize: "1.2rem",
-                    transition: "transform 0.3s ease",
-                  }}
-                  onMouseOver={(e) => (e.target.style.transform = "scale(1.2)")}
-                  onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
-                >
-                  ★
-                </span>
-              ))}
-            </div>
-            <p
-              style={{
-                margin: 0,
-                fontSize: "1rem",
-                color: "#666",
-                fontWeight: "400",
-              }}
-            >
-              Join thousands of bloggers worldwide
-            </p>
-          </div>
-
-          {/* Main Heading with Colored Words */}
+      {/* Main Section */}
+      {user ? (
+        <main
+          style={{
+            padding: "60px 40px",
+            maxWidth: "800px",
+            margin: "0 auto",
+          }}
+        >
           <h2
             style={{
-              fontSize: "2.8rem",
+              fontSize: "2.5rem",
               fontWeight: "700",
-              marginBottom: "25px",
-              lineHeight: "1.3",
-              letterSpacing: "-0.5px",
+              marginBottom: "20px",
+              color: "#333",
             }}
           >
-            <span
-              style={{
-                color: "#007bff",
-                background: "linear-gradient(90deg, #007bff, #00c4ff)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              Share
-            </span>{" "}
-            Your Thoughts and{" "}
-            <span
-              style={{
-                color: "#007bff",
-                background: "linear-gradient(90deg, #007bff, #00c4ff)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              Connect
-            </span>{" "}
-            with{" "}
-            <span
-              style={{
-                color: "#ff6f61",
-                background: "linear-gradient(90deg, #ff6f61, #ff9f80)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              the World
-            </span>
+            Feed 📮
           </h2>
-
-          {/* Description */}
-          <p
-            style={{
-              fontSize: "1.1rem",
-              color: "#555",
-              marginBottom: "25px",
-              lineHeight: "1.7",
-              fontWeight: "300",
-            }}
-          >
-            Easily register, create, and share your blogs. Engage with others by
-            commenting and exploring diverse perspectives.
-          </p>
-
-          {/* Call to Action Text */}
-          <p
-            style={{
-              fontSize: "1rem",
-              color: "#666",
-              marginBottom: "25px",
-              fontStyle: "italic",
-              fontWeight: "400",
-            }}
-          >
-            Let’s get you started then
-          </p>
-
-          {/* Buttons */}
-          <div style={{ display: "flex", gap: "15px", marginBottom: "25px" }}>
-            <Link to="/login">
-              <button
+          {posts.length === 0 ? (
+            <p>No posts yet. Be the first to create one!</p>
+          ) : (
+            posts.map((post) => (
+              <div
+                key={post._id}
                 style={{
-                  padding: "12px 35px",
-                  fontSize: "1.1rem",
-                  color: "#fff",
-                  background: "linear-gradient(90deg, #007bff, #00c4ff)",
-                  border: "none",
-                  borderRadius: "8px",
-                  cursor: "pointer",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  boxShadow: "0 4px 12px rgba(0, 123, 255, 0.3)",
+                  backgroundColor: "#f5f5f5",
+                  borderRadius: "10px",
+                  padding: "20px",
+                  marginBottom: "20px",
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                 }}
-                onMouseOver={(e) => (
-                  (e.target.style.transform = "translateY(-3px)"),
-                  (e.target.style.boxShadow =
-                    "0 6px 16px rgba(0, 123, 255, 0.4)")
-                )}
-                onMouseOut={(e) => (
-                  (e.target.style.transform = "translateY(0)"),
-                  (e.target.style.boxShadow =
-                    "0 4px 12px rgba(0, 123, 255, 0.3)")
-                )}
               >
-                Login
-              </button>
-            </Link>
-            <Link to="/register">
-              <button
-                style={{
-                  padding: "12px 35px",
-                  fontSize: "1.1rem",
-                  color: "#333",
-                  backgroundColor: "#fff",
-                  border: "1px solid #333",
-                  borderRadius: "8px",
-                  cursor: "pointer",
-                  transition:
-                    "background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
-                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-                }}
-                onMouseOver={(e) => (
-                  (e.target.style.backgroundColor = "#333"),
-                  (e.target.style.color = "#fff"),
-                  (e.target.style.transform = "translateY(-3px)"),
-                  (e.target.style.boxShadow = "0 6px 16px rgba(0, 0, 0, 0.2)")
+                <h3 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "10px" }}>
+                  {post.title}
+                </h3>
+                <p style={{ fontSize: "1rem", color: "#555", marginBottom: "10px" }}>
+                  {post.content}
+                </p>
+                {post.image && (
+                  <img
+                    src={`http://localhost:4000${post.image}`}
+                    alt="Post"
+                    style={{
+                      maxWidth: "100%",
+                      borderRadius: "5px",
+                      marginBottom: "10px",
+                    }}
+                  />
                 )}
-                onMouseOut={(e) => (
-                  (e.target.style.backgroundColor = "#fff"),
-                  (e.target.style.color = "#333"),
-                  (e.target.style.transform = "translateY(0)"),
-                  (e.target.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)")
-                )}
-              >
-                Register
-              </button>
-            </Link>
-          </div>
-
-          {/* Fine Print */}
-          <p
+                <p style={{ fontSize: "0.9rem", color: "#666" }}>
+                  Posted by {post.userId.username} on{" "}
+                  {new Date(post.createdAt).toLocaleDateString()}
+                </p>
+              </div>
+            ))
+          )}
+        </main>
+      ) : (
+        <>
+          {/* Hero Section */}
+          <main
             style={{
-              fontSize: "0.9rem",
-              color: "#666",
-              fontStyle: "italic",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "60px 40px",
+              gap: "40px",
+              flexWrap: "wrap",
             }}
           >
-            *Be a part of PostGO fam🩷
-          </p>
-        </div>
+            {/* Left Side - Text and Buttons */}
+            <div style={{ maxWidth: "500px", textAlign: "left" }}>
+              {/* Rating and Tagline */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  marginBottom: "25px",
+                }}
+              >
+                <div style={{ display: "flex", gap: "5px" }}>
+                  {[...Array(5)].map((_, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        color: "#ffd700",
+                        fontSize: "1.2rem",
+                        transition: "transform 0.3s ease",
+                      }}
+                      onMouseOver={(e) => (e.target.style.transform = "scale(1.2)")}
+                      onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
+                    >
+                      ★
+                    </span>
+                  ))}
+                </div>
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: "1rem",
+                    color: "#666",
+                    fontWeight: "400",
+                  }}
+                >
+                  Join thousands of bloggers worldwide
+                </p>
+              </div>
 
-        {/* Right Side - Custom Image */}
-        <img
-          src="https://img.freepik.com/free-vector/hand-drawn-essay-illustration_23-2150293914.jpg?t=st=1743069511~exp=1743073111~hmac=866259517bc459180bac0fac0d68bdb9ed55a9f985c1f26993bea70c6c19c9fb&w=740" // Reference the image from the public folder
-          alt="Blogging illustration"
-          style={{
-            maxWidth: "500px",
-            width: "100%",
-            borderRadius: "15px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-            objectFit: "cover",
-          }}
-        />
-      </main>
+              {/* Main Heading with Colored Words */}
+              <h2
+                style={{
+                  fontSize: "2.8rem",
+                  fontWeight: "700",
+                  marginBottom: "25px",
+                  lineHeight: "1.3",
+                  letterSpacing: "-0.5px",
+                }}
+              >
+                <span
+                  style={{
+                    color: "#007bff",
+                    background: "linear-gradient(90deg, #007bff, #00c4ff)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  Share
+                </span>{" "}
+                Your Thoughts and{" "}
+                <span
+                  style={{
+                    color: "#007bff",
+                    background: "linear-gradient(90deg, #007bff, #00c4ff)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  Connect
+                </span>{" "}
+                with{" "}
+                <span
+                  style={{
+                    color: "#ff6f61",
+                    background: "linear-gradient(90deg, #ff6f61, #ff9f80)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  the World !
+                </span>
+              </h2>
 
-      {/* Features Section */}
-      <section style={{ padding: "60px 20px", textAlign: "center" }}>
-        <h2
-          style={{
-            fontSize: "2.5rem",
-            fontWeight: "700",
-            marginBottom: "20px",
-            color: "#333",
-            letterSpacing: "-0.5px",
-          }}
-        >
-          Why PostGO?
-        </h2>
-        <p
-          style={{
-            fontSize: "1.2rem",
-            lineHeight: "1.8",
-            marginBottom: "40px",
-            maxWidth: "800px",
-            marginInline: "auto",
-            color: "#555",
-            fontWeight: "300",
-          }}
-        >
-          PostGO is your one-stop platform for sharing ideas, exploring trends,
-          and connecting with a like-minded community. Join us today and enjoy:
-        </p>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "20px",
-            padding: "0 20px",
-            maxWidth: "1200px",
-            marginInline: "auto",
-          }}
-        >
-          {[
-            "✍️ Create amazing posts to express yourself.",
-            "🌐 Explore trending topics and ideas.",
-            "🤝 Connect with like-minded individuals.",
-            "📈 Grow your audience effortlessly!",
-            "🎨 Personalize your profile to showcase style",
-          ].map((text, index) => (
-            <div
-              key={index}
-              style={{
-                backgroundColor: "#f5f5f5",
-                borderRadius: "10px",
-                padding: "20px",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                cursor: "pointer",
-                fontSize: "1rem",
-                color: "#333",
-                fontWeight: "400",
-                lineHeight: "1.5",
-              }}
-              onMouseOver={(e) => (
-                (e.target.style.transform = "scale(1.05)"),
-                (e.target.style.boxShadow = "0 8px 16px rgba(0, 0, 0, 0.2)")
-              )}
-              onMouseOut={(e) => (
-                (e.target.style.transform = "scale(1)"),
-                (e.target.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)")
-              )}
-            >
-              {text}
+              {/* Description */}
+              <p
+                style={{
+                  fontSize: "1.1rem",
+                  color: "#555",
+                  marginBottom: "25px",
+                  lineHeight: "1.7",
+                  fontWeight: "300",
+                }}
+              >
+                Easily register, create, and share your blogs. Engage with others by
+                commenting and exploring diverse perspectives.
+              </p>
+
+              {/* Call to Action Text */}
+              <p
+                style={{
+                  fontSize: "1rem",
+                  color: "#666",
+                  marginBottom: "25px",
+                  fontStyle: "italic",
+                  fontWeight: "400",
+                }}
+              >
+                Let’s get you started then
+              </p>
+
+              {/* Buttons */}
+              <div style={{ display: "flex", gap: "15px", marginBottom: "25px" }}>
+                <Link to="/login">
+                  <button
+                    style={{
+                      padding: "12px 35px",
+                      fontSize: "1.1rem",
+                      color: "#fff",
+                      background: "linear-gradient(90deg, #007bff, #00c4ff)",
+                      border: "none",
+                      borderRadius: "8px",
+                      cursor: "pointer",
+                      transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                      boxShadow: "0 4px 12px rgba(0, 123, 255, 0.3)",
+                    }}
+                    onMouseOver={(e) => (
+                      (e.target.style.transform = "translateY(-3px)"),
+                      (e.target.style.boxShadow =
+                        "0 6px 16px rgba(0, 123, 255, 0.4)")
+                    )}
+                    onMouseOut={(e) => (
+                      (e.target.style.transform = "translateY(0)"),
+                      (e.target.style.boxShadow =
+                        "0 4px 12px rgba(0, 123, 255, 0.3)")
+                    )}
+                  >
+                    Login
+                  </button>
+                </Link>
+                <Link to="/register">
+                  <button
+                    style={{
+                      padding: "12px 35px",
+                      fontSize: "1.1rem",
+                      color: "#333",
+                      backgroundColor: "#fff",
+                      border: "1px solid #333",
+                      borderRadius: "8px",
+                      cursor: "pointer",
+                      transition:
+                        "background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease",
+                      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                    }}
+                    onMouseOver={(e) => (
+                      (e.target.style.backgroundColor = "#333"),
+                      (e.target.style.color = "#fff"),
+                      (e.target.style.transform = "translateY(-3px)"),
+                      (e.target.style.boxShadow = "0 6px 16px rgba(0, 0, 0, 0.2)")
+                    )}
+                    onMouseOut={(e) => (
+                      (e.target.style.backgroundColor = "#fff"),
+                      (e.target.style.color = "#333"),
+                      (e.target.style.transform = "translateY(0)"),
+                      (e.target.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)")
+                    )}
+                  >
+                    Register
+                  </button>
+                </Link>
+              </div>
+
+              {/* Fine Print */}
+              <p
+                style={{
+                  fontSize: "0.9rem",
+                  color: "#666",
+                  fontStyle: "italic",
+                }}
+              >
+                *Be a part of PostGO fam🩷
+              </p>
             </div>
-          ))}
-        </div>
-      </section>
+
+            {/* Right Side - Custom Image */}
+            <img
+              src="https://img.freepik.com/free-vector/hand-drawn-essay-illustration_23-2150293914.jpg?t=st=1743069511~exp=1743073111~hmac=866259517bc459180bac0fac0d68bdb9ed55a9f985c1f26993bea70c6c19c9fb&w=740" // Reference the image from the public folder
+              alt="Blogging illustration"
+              style={{
+                maxWidth: "500px",
+                width: "100%",
+                borderRadius: "15px",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                objectFit: "cover",
+              }}
+            />
+          </main>
+
+          {/* Features Section */}
+          <section style={{ padding: "60px 20px", textAlign: "center" }}>
+            <h2
+              style={{
+                fontSize: "2.5rem",
+                fontWeight: "700",
+                marginBottom: "20px",
+                color: "#333",
+                letterSpacing: "-0.5px",
+              }}
+            >
+              Why PostGO?
+            </h2>
+            <p
+              style={{
+                fontSize: "1.2rem",
+                lineHeight: "1.8",
+                marginBottom: "40px",
+                maxWidth: "800px",
+                marginInline: "auto",
+                color: "#555",
+                fontWeight: "300",
+              }}
+            >
+              PostGO is your one-stop platform for sharing ideas, exploring trends,
+              and connecting with a like-minded community. Join us today and enjoy:
+            </p>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                gap: "20px",
+                padding: "0 20px",
+                maxWidth: "1200px",
+                marginInline: "auto",
+              }}
+            >
+              {[
+                "✍️ Create amazing posts to express yourself.",
+                "🌐 Explore trending topics and ideas.",
+                "🤝 Connect with like-minded individuals.",
+                "📈 Grow your audience effortlessly!",
+                "🎨 Personalize your profile to showcase style",
+              ].map((text, index) => (
+                <div
+                  key={index}
+                  style={{
+                    backgroundColor: "#f5f5f5",
+                    borderRadius: "10px",
+                    padding: "20px",
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                    cursor: "pointer",
+                    fontSize: "1rem",
+                    color: "#333",
+                    fontWeight: "400",
+                    lineHeight: "1.5",
+                  }}
+                  onMouseOver={(e) => (
+                    (e.target.style.transform = "scale(1.05)"),
+                    (e.target.style.boxShadow = "0 8px 16px rgba(0, 0, 0, 0.2)")
+                  )}
+                  onMouseOut={(e) => (
+                    (e.target.style.transform = "scale(1)"),
+                    (e.target.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)")
+                  )}
+                >
+                  {text}
+                </div>
+              ))}
+            </div>
+          </section>
+        </>
+      )}
 
       {/* Footer Section */}
       <footer

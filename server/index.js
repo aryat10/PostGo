@@ -4,13 +4,38 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const User = require("./models/User");
+const Post = require("./models/Post"); // Import the Post model
+const multer = require("multer"); // For handling file uploads
+const path = require("path"); // For handling file paths
+const fs = require("fs"); // For file system operations
+require("dotenv").config();
 
 const app = express();
-const JWT_SECRET = "your_secret_key_here"; // Replace with a strong secret key
+const JWT_SECRET = process.env.JWT_SECRET; // Replace with a strong secret key
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serve static files (for uploaded images)
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// Ensure the uploads directory exists
+const uploadsDir = path.join(__dirname, "uploads");
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir);
+}
+
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // Store images in the uploads folder
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); // Unique filename with timestamp
+  },
+});
+const upload = multer({ storage });
 
 // MongoDB Connection
 mongoose
@@ -121,6 +146,54 @@ app.post("/create", verifyToken, (req, res) => {
   res
     .status(200)
     .json({ message: "Post created successfully", user: req.user });
+});
+
+// New route to create a post with image upload
+app.post("/create-post", verifyToken, upload.single("image"), async (req, res) => {
+  const { heading, content } = req.body;
+  const image = req.file ? `/uploads/${req.file.filename}` : null;
+
+  if (!heading || !content) {
+    return res.status(400).json({ error: "Heading and content are required" });
+  }
+
+  try {
+    const newPost = new Post({
+      title: heading,
+      content,
+      image,
+      userId: req.user.id,
+    });
+    await newPost.save();
+    res.status(201).json({ message: "Post created successfully", post: newPost });
+  } catch (err) {
+    console.error("Error creating post:", err);
+    res.status(500).json({ error: "Failed to create post" });
+  }
+});
+
+// New route to fetch all posts for the feed
+app.get("/posts", async (req, res) => {
+  try {
+    const posts = await Post.find().populate("userId", "username").sort({ createdAt: -1 });
+    res.status(200).json(posts);
+  } catch (err) {
+    console.error("Error fetching posts:", err);
+    res.status(500).json({ error: "Failed to fetch posts" });
+  }
+});
+
+// New route to fetch posts for a specific user
+app.get("/posts/user/:userId", async (req, res) => {
+  try {
+    const posts = await Post.find({ userId: req.params.userId })
+      .populate("userId", "username")
+      .sort({ createdAt: -1 });
+    res.status(200).json(posts);
+  } catch (err) {
+    console.error("Error fetching user posts:", err);
+    res.status(500).json({ error: "Failed to fetch user posts" });
+  }
 });
 
 // Start the server

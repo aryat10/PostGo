@@ -5,26 +5,34 @@ import axios from "axios";
 
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchProfile = async () => {
+    const fetchProfileAndPosts = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
         setError("No token found. Please login.");
         return;
       }
       try {
-        const response = await axios.get("http://localhost:4000/profile", {
+        // Fetch user profile
+        const userResponse = await axios.get("http://localhost:4000/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setUser(response.data.user);
+        setUser(userResponse.data.user);
+
+        // Fetch user's posts
+        const postsResponse = await axios.get(
+          `http://localhost:4000/posts/user/${userResponse.data.user._id}`
+        );
+        setPosts(postsResponse.data);
       } catch (err) {
-        setError("Failed to fetch profile");
+        setError("Failed to fetch profile or posts");
       }
     };
-    fetchProfile();
+    fetchProfileAndPosts();
   }, []);
 
   function handleLogout() {
@@ -250,19 +258,56 @@ export default function ProfilePage() {
           )}
         </div>
 
-        {/* Right Side - Illustration */}
-        <img
-          src="https://img.freepik.com/free-vector/profile-interface-concept-illustration_114360-2850.jpg?t=st=1743111480~exp=1743115080~hmac=16ad16474b133f918f16593e2d894b32913fe5b891cb7ef563f56365c156d573&w=740"
-          alt="Profile illustration"
-          style={{
-            maxWidth: "500px",
-            width: "100%",
-            height: "400px",
-            borderRadius: "15px",
-            boxShadow: "0 0px 0px rgba(0, 0, 0, 0.1)",
-            objectFit: "cover",
-          }}
-        />
+        {/* Right Side - User's Posts */}
+        <div style={{ maxWidth: "500px", textAlign: "left" }}>
+          <h3
+            style={{
+              fontSize: "1.8rem",
+              fontWeight: "600",
+              marginBottom: "20px",
+              color: "#333",
+            }}
+          >
+            Your Posts
+          </h3>
+          {posts.length === 0 ? (
+            <p>You haven't created any posts yet.</p>
+          ) : (
+            posts.map((post) => (
+              <div
+                key={post._id}
+                style={{
+                  backgroundColor: "#f5f5f5",
+                  borderRadius: "10px",
+                  padding: "20px",
+                  marginBottom: "20px",
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                }}
+              >
+                <h4 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "10px" }}>
+                  {post.title}
+                </h4>
+                <p style={{ fontSize: "1rem", color: "#555", marginBottom: "10px" }}>
+                  {post.content}
+                </p>
+                {post.image && (
+                  <img
+                    src={`http://localhost:4000${post.image}`}
+                    alt="Post"
+                    style={{
+                      maxWidth: "100%",
+                      borderRadius: "5px",
+                      marginBottom: "10px",
+                    }}
+                  />
+                )}
+                <p style={{ fontSize: "0.9rem", color: "#666" }}>
+                  Posted on {new Date(post.createdAt).toLocaleDateString()}
+                </p>
+              </div>
+            ))
+          )}
+        </div>
       </main>
 
       {/* Footer Section */}
