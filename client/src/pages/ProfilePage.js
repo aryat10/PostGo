@@ -17,7 +17,7 @@ export default function ProfilePage() {
         return;
       }
       try {
-        // Fetch user profile
+        
         const userResponse = await axios.get("http://localhost:4000/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -53,7 +53,7 @@ export default function ProfilePage() {
         minHeight: "100vh",
       }}
     >
-      {/* Header Section */}
+      
       <header
         style={{
           display: "flex",
@@ -127,7 +127,7 @@ export default function ProfilePage() {
         </div>
       </header>
 
-      {/* Main Section */}
+      
       <main
         style={{
           display: "flex",
@@ -138,7 +138,7 @@ export default function ProfilePage() {
           flexWrap: "wrap",
         }}
       >
-        {/* Left Side - Profile Card */}
+        
         <div style={{ maxWidth: "500px", textAlign: "left" }}>
           <h2
             style={{
@@ -258,7 +258,7 @@ export default function ProfilePage() {
           )}
         </div>
 
-        {/* Right Side - User's Posts */}
+        
         <div style={{ maxWidth: "500px", textAlign: "left" }}>
           <h3
             style={{

@@ -11,18 +11,18 @@ export default function HomePage() {
       const token = localStorage.getItem("token");
       if (token) {
         try {
-          // Fetch user profile
+          
           const userResponse = await axios.get("http://localhost:4000/profile", {
             headers: { Authorization: `Bearer ${token}` },
           });
           setUser(userResponse.data.user);
 
-          // Fetch all posts for the feed
+          
           const postsResponse = await axios.get("http://localhost:4000/posts");
           setPosts(postsResponse.data);
         } catch (err) {
           console.error("Error fetching data:", err);
-          localStorage.removeItem("token"); // Clear token if invalid
+          localStorage.removeItem("token"); 
         }
       }
     };
@@ -38,7 +38,7 @@ export default function HomePage() {
         minHeight: "100vh",
       }}
     >
-      {/* Header Section */}
+      
       <header
         style={{
           display: "flex",
@@ -52,7 +52,7 @@ export default function HomePage() {
         <Link
           to="/"
           style={{
-            textDecoration: "none", // Remove the underline with !important
+            textDecoration: "none", 
           }}
         >
           <h1
@@ -168,7 +168,7 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Main Section */}
+     
       {user ? (
         <main
           style={{
@@ -228,7 +228,7 @@ export default function HomePage() {
         </main>
       ) : (
         <>
-          {/* Hero Section */}
+          
           <main
             style={{
               display: "flex",
@@ -239,9 +239,9 @@ export default function HomePage() {
               flexWrap: "wrap",
             }}
           >
-            {/* Left Side - Text and Buttons */}
+            
             <div style={{ maxWidth: "500px", textAlign: "left" }}>
-              {/* Rating and Tagline */}
+              
               <div
                 style={{
                   display: "flex",
@@ -278,7 +278,7 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* Main Heading with Colored Words */}
+              
               <h2
                 style={{
                   fontSize: "2.8rem",
@@ -322,7 +322,7 @@ export default function HomePage() {
                 </span>
               </h2>
 
-              {/* Description */}
+              
               <p
                 style={{
                   fontSize: "1.1rem",
@@ -336,7 +336,7 @@ export default function HomePage() {
                 commenting and exploring diverse perspectives.
               </p>
 
-              {/* Call to Action Text */}
+             
               <p
                 style={{
                   fontSize: "1rem",
@@ -410,7 +410,7 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              {/* Fine Print */}
+              
               <p
                 style={{
                   fontSize: "0.9rem",
@@ -422,7 +422,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Right Side - Custom Image */}
+            
             <img
               src="https://img.freepik.com/free-vector/hand-drawn-essay-illustration_23-2150293914.jpg?t=st=1743069511~exp=1743073111~hmac=866259517bc459180bac0fac0d68bdb9ed55a9f985c1f26993bea70c6c19c9fb&w=740" // Reference the image from the public folder
               alt="Blogging illustration"
@@ -436,7 +436,7 @@ export default function HomePage() {
             />
           </main>
 
-          {/* Features Section */}
+          
           <section style={{ padding: "60px 20px", textAlign: "center" }}>
             <h2
               style={{
@@ -511,7 +511,7 @@ export default function HomePage() {
         </>
       )}
 
-      {/* Footer Section */}
+      
       <footer
         style={{
           padding: "40px 20px",
@@ -528,7 +528,7 @@ export default function HomePage() {
             margin: "0 auto",
           }}
         >
-          {/* Main Footer Text */}
+          
           <p
             style={{
               fontSize: "1.3rem",
@@ -545,7 +545,7 @@ export default function HomePage() {
             <span>by Aryat</span>
           </p>
 
-          {/* Tagline */}
+          
           <p
             style={{
               fontSize: "1rem",
@@ -557,7 +557,7 @@ export default function HomePage() {
             Transforming ideas into reality, one post at a time.
           </p>
 
-          {/* Social Links */}
+          
           <div
             style={{
               display: "flex",
@@ -637,7 +637,7 @@ export default function HomePage() {
             </a>
           </div>
 
-          {/* Additional Info */}
+          
           <p
             style={{
               fontSize: "0.85rem",
