@@ -16,22 +16,31 @@ export default function ProfilePage() {
         setError("No token found. Please login.");
         return;
       }
+
       try {
-        
+        // Fetch user profile
         const userResponse = await axios.get("https://postgo-8.onrender.com/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
+        console.log("User Response:", userResponse.data);
         setUser(userResponse.data.user);
 
-        // Fetch user's posts
+        // Fetch user's posts (Updated endpoint)
         const postsResponse = await axios.get(
-          `https://postgo-8.onrender.com/user/${userResponse.data.user._id}/posts`
+          `https://postgo-8.onrender.com/posts/user/${userResponse.data.user._id}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
-        setPosts(postsResponse.data);
+        console.log("Posts Response:", postsResponse.data);
+        setPosts(Array.isArray(postsResponse.data) ? postsResponse.data : postsResponse.data.posts || []);
       } catch (err) {
-        setError("Failed to fetch profile or posts");
+        const errorMessage = err.response?.data?.message || err.message;
+        console.error("Fetch Error:", errorMessage);
+        setError(`Failed to fetch data: ${errorMessage}`);
       }
     };
+
     fetchProfileAndPosts();
   }, []);
 
@@ -53,7 +62,7 @@ export default function ProfilePage() {
         minHeight: "100vh",
       }}
     >
-      
+      {/* Header Section */}
       <header
         style={{
           display: "flex",
@@ -127,7 +136,7 @@ export default function ProfilePage() {
         </div>
       </header>
 
-      
+      {/* Main Content */}
       <main
         style={{
           display: "flex",
@@ -138,7 +147,7 @@ export default function ProfilePage() {
           flexWrap: "wrap",
         }}
       >
-        
+        {/* Profile Section */}
         <div style={{ maxWidth: "500px", textAlign: "left" }}>
           <h2
             style={{
@@ -149,7 +158,8 @@ export default function ProfilePage() {
               letterSpacing: "-0.5px",
             }}
           >
-            Your <span
+            Your{" "}
+            <span
               style={{
                 color: "#007bff",
                 background: "linear-gradient(90deg, #007bff, #00c4ff)",
@@ -158,7 +168,8 @@ export default function ProfilePage() {
               }}
             >
               Profile
-            </span> 👤
+            </span>{" "}
+            👤
           </h2>
           {user ? (
             <div
@@ -170,7 +181,6 @@ export default function ProfilePage() {
                 border: "1px solid #e0e0e0",
               }}
             >
-              {/* Avatar */}
               <div
                 style={{
                   width: "80px",
@@ -258,7 +268,7 @@ export default function ProfilePage() {
           )}
         </div>
 
-        
+        {/* Posts Section */}
         <div style={{ maxWidth: "500px", textAlign: "left" }}>
           <h3
             style={{
@@ -284,10 +294,22 @@ export default function ProfilePage() {
                   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                 }}
               >
-                <h4 style={{ fontSize: "1.5rem", fontWeight: "600", marginBottom: "10px" }}>
+                <h4
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: "600",
+                    marginBottom: "10px",
+                  }}
+                >
                   {post.title}
                 </h4>
-                <p style={{ fontSize: "1rem", color: "#555", marginBottom: "10px" }}>
+                <p
+                  style={{
+                    fontSize: "1rem",
+                    color: "#555",
+                    marginBottom: "10px",
+                  }}
+                >
                   {post.content}
                 </p>
                 {post.image && (
