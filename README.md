@@ -31,13 +31,13 @@ To run this project locally, follow these steps:
 
 2. Install backend dependencies:
    ```bash
-   cd backend
+   cd seever
    npm install
    ```
 
 3. Install frontend dependencies:
    ```bash
-   cd ../frontend
+   cd client
    npm install
    ```
 
