@@ -31,7 +31,7 @@ To run this project locally, follow these steps:
 
 2. Install backend dependencies:
    ```bash
-   cd seever
+   cd server
    npm install
    ```
 
