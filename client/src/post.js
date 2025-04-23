@@ -63,7 +63,7 @@ export default function HomePage() {
               color: "#333",
             }}
           >
-            PostGO
+            PostGo
           </h1>
         </Link>
         <div style={{ display: "flex", gap: "10px" }}>
