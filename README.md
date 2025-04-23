@@ -32,30 +32,31 @@ To run this project locally, follow these steps:
 2. Install backend dependencies:
    ```bash
    cd server
-   npm install
+   npm install 
+   npm i express cors jwt axios bcrypt mongoose multer 
    ```
 
 3. Install frontend dependencies:
    ```bash
    cd client
-   npm install
+   npx create-react-app .
    ```
 
 4. Set up environment variables:
    Create a `.env` file in the `backend` folder with the following:
    ```env
-   JWT_SECRET=your_jwt_secret
-   MONGO_URI=your_mongo_db_uri
+   JWT_SECRET=KEY
+   MONGO_URI=mongo_db_uri
    ```
 
 5. Start the backend server:
    ```bash
-   npm start
+   node index.js
    ```
 
 6. Start the frontend server:
    ```bash
-   npm start
+   npm run start
    ```
 
 ## 🤝 Contributing
