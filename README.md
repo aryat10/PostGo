@@ -3,7 +3,7 @@
 PostGo is a full-fledged MERN (MongoDB, Express.js, React.js, Node.js) web application that allows users to create, read, update, and delete posts. Users can also upload images along with their posts. The platform supports secure user authentication and dynamic content display.
 
 ## 🚀 Live Demo
-Check out the live application here: [PostGo](https://postgo-11-jyrn.onrender.com/)
+Check out the live application here: [PostGo](https://post-go-pink.vercel.app/)
 
 ## 💻 Tech Stack
 - **Frontend:** React.js, Axios
